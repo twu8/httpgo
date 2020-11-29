@@ -1,15 +1,8 @@
-FROM golang:1.15.5-alpine
+FROM alpine:3.5
 
-ENV SOURCES /go/src/github.com/PacktPublishing/httpgo
+COPY ./httpgo /app/httpgo
+RUN chmod +x /app/httpgo
+ENV PORT 8080
+EXPOSE 8080
 
-COPY . ${SOURCES}
-# COPY ./httpgo /app/httpgo
-
-RUN cd ${SOURCES} && CGO_ENABLED=0 go install
-
-# RUN chmod +x /app/httpgo
-
-ENV PORT 8086
-EXPOSE 8086
-
-ENTRYPOINT httpgo
+ENTRYPOINT /app/httpgo

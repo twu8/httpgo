@@ -60,6 +60,9 @@ Login Succeeded
 docker push ouyang8/httpgo:1.0.1
 The push refers to repository [docker.io/ouyang8/httpgo]
 ```
+Docker repository
+
+`https://hub.docker.com/repository/docker/ouyang8/httpgo`
 
 ## Running Docker image locally
 
@@ -72,5 +75,27 @@ docker run --name=httpgo -d -p 8080:8080 httpgo:1.0.1
 docker ps
 docker stats
 docker stop
-docker start
+docker start 
+docker kill httpgo
+docker rm httpgo
+```
+
+## Reduce the Docker image size
+
+```bash
+GOOS=linux GOARCH=amd64 go build
+docker build -t httpgo:1.0.2-alpine .
+docker images
+docker tag httpgo:1.0.2-alpine ouyang8/httpgo:1.0.2-alpine
+docker push ouyang8/httpgo:1.0.2-alpine
+```
+
+## Docker Compose
+
+```bash
+$ docker-compose build
+$ docker images
+$ docker-compose up -d
+$ docker-compose kill
+$ docker-compose rm
 ```

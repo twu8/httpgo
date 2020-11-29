@@ -48,7 +48,7 @@ to quickly create a Cobra application.`,
 			port = args[0]
 		}
 
-		fmt.Println("Start Httpgo server at port:" + port)
+		// fmt.Println("Start Httpgo server at port:" + port)
 		server.Execute(port)
 	},
 }

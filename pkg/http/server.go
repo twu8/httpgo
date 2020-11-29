@@ -24,6 +24,7 @@ func findPort(port string) string {
 	if len(p) == 0 {
 		p = port
 	}
+	fmt.Println("Start Httpgo server at port:" + p)
 	return ":" + p
 }
 
