@@ -6,10 +6,15 @@ import (
 	"os"
 
 	"httpgo/pkg/http/api"
+	"httpgo/pkg/http/response"
 )
 
 func Execute(port string) {
 	http.HandleFunc("/", index)
+
+	http.HandleFunc("/response/deply/", response.DelayHandleFunc)
+	http.HandleFunc("/response/header/", response.HeaderHandleFunc)
+
 	http.HandleFunc("/api/echo", api.EchoHandleFunc)
 	http.HandleFunc("/api/hello", api.HelloHandleFunc)
 

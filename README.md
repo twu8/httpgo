@@ -22,6 +22,8 @@ go mod init httpgo
 
 `./httpgo`
 
+`./httpgo 8086`
+
 ## APIs
 
 ```bash
@@ -29,9 +31,25 @@ http://localhost:8080/
 http://localhost:8080/api/echo?message=hello
 http://localhost:8080/api/books
 ```
+## Response
 
+### Delay send response back
 
+For example, following delay 5 seconds, and 350ms
+```bash
+http://localhost:8080/response/deply/5s
+http://localhost:8080/response/deply/350ms
+```
 
+### Echo back request headers in response body
+
+```bash
+http://localhost:8080/response/header/
+
+curl  -H "abc: def" http://localhost:8086/response/header/
+user-agent=curl/7.64.1; accept=*/*; abc=def%
+
+```
 
 # Docker 
 
@@ -67,8 +85,9 @@ Docker repository
 ## Running Docker image locally
 
 ```bash
-docker run -it -p 8086:8086 httpgo:1.0.1
+docker run -it -p 8088:8088 httpgo:1.0.1
 docker run -it -e "PORT=9090" -p 9090:9090 httpgo:1.0.1
+docker run -it -e "PORT=9090" -p 9090:9090 httpgo:1.0.4-alpine
 docker ps --all
 
 docker run --name=httpgo -d -p 8080:8080 httpgo:1.0.1
@@ -93,9 +112,9 @@ docker push ouyang8/httpgo:1.0.2-alpine
 ## Docker Compose
 
 ```bash
-$ docker-compose build
-$ docker images
-$ docker-compose up -d
-$ docker-compose kill
-$ docker-compose rm
+docker-compose build
+docker images
+docker-compose up -d
+docker-compose kill
+docker-compose rm
 ```
