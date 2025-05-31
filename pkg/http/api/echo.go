@@ -13,5 +13,9 @@ func EchoHandleFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	message := r.URL.Query()["message"][0]
+	if message == "" {
+		fmt.Fprintf(w, "No message to echo")
+		return
+	}
 	fmt.Fprintf(w, message)
 }

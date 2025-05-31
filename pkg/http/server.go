@@ -17,6 +17,7 @@ func Execute(port string) {
 
 	http.HandleFunc("/api/echo", api.EchoHandleFunc)
 	http.HandleFunc("/api/hello", api.HelloHandleFunc)
+	http.HandleFunc("/version", api.VersionHandleFunc)
 
 	http.HandleFunc("/api/books", api.BooksHandleFunc)
 	http.HandleFunc("/api/books/", api.BookHandleFunc)

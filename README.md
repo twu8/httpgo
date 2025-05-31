@@ -118,3 +118,47 @@ docker-compose up -d
 docker-compose kill
 docker-compose rm
 ```
+
+## Building with Makefile
+
+The `Makefile` in the project root allows for convenient local builds and includes version information (version, build time, commit hash) into the compiled binary. This version information is accessible via the `/version` endpoint.
+
+Here are the common `make` commands:
+
+*   **Build the application:**
+    ```bash
+    make build
+    ```
+    This compiles the `httpgo` binary. The default version is "dev".
+
+*   **Build with a specific version:**
+    You can specify a version by setting the `VERSION` variable:
+    ```bash
+    make build VERSION=v1.0.0
+    ```
+
+*   **Run the application:**
+    This command will first build the application (if not already built or if sources have changed) and then run it.
+    ```bash
+    make run
+    ```
+    To run with a specific version:
+    ```bash
+    make run VERSION=v1.0.1
+    ```
+
+*   **Clean build artifacts:**
+    This removes the compiled `httpgo` binary.
+    ```bash
+    make clean
+    ```
+
+*   **Show version information:**
+    This command displays the version, build time, and commit hash that will be compiled into the binary without actually performing a full build.
+    ```bash
+    make show_version
+    ```
+    To see what a specific version would show:
+    ```bash
+    make show_version VERSION=v1.2.3
+    ```
