@@ -13,16 +13,20 @@ go mod init httpgo
 ## Build
 
 `go build`
+or
+`make build`
 
 ## Test
 
-`go test ./api -v`
+`go test ./...`
+or
+`make test`
 
 ## Run
 
 `./httpgo`
 
-`./httpgo 8086`
+`./httpgo 8088`
 
 ## APIs
 
