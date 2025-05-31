@@ -14,6 +14,7 @@ COMMIT_HASH := $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
 GO=go
 GO_BUILD=$(GO) build
 GO_CLEAN=$(GO) clean
+GO_TEST=$(GO) test
 
 # Linker flags
 LDFLAGS = -ldflags="-X $(PKG_PATH).Version=$(VERSION) -X '$(PKG_PATH).BuildTime=$(BUILD_TIME)' -X $(PKG_PATH).CommitHash=$(COMMIT_HASH)"
@@ -32,6 +33,12 @@ run: build
 	@echo "Running $(BINARY_NAME)..."
 	./$(BINARY_NAME)
 
+# Test the application
+test:
+	@echo "Running tests..."
+	$(GO_TEST) ./... -v
+	@echo "Tests complete."
+
 # Clean the binary
 clean:
 	@echo "Cleaning..."
@@ -45,4 +52,4 @@ show_version:
 	@echo "Build Time: $(BUILD_TIME)"
 	@echo "Commit Hash: $(COMMIT_HASH)"
 
-.PHONY: all build run clean show_version
+.PHONY: all build run test clean show_version
