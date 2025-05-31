@@ -1,13 +1,15 @@
 FROM golang:1.15.5-alpine
 
+ARG VERSION_ARG="dev"
+ARG BUILD_TIME_ARG="unknown"
+ARG COMMIT_HASH_ARG="unknown"
+
 ENV SOURCES /go/src/github.com/PacktPublishing/httpgo
 
 COPY . ${SOURCES}
-# COPY ./httpgo /app/httpgo
 
-RUN cd ${SOURCES} && CGO_ENABLED=0 go install
-
-# RUN chmod +x /app/httpgo
+# Update the go install command to include ldflags
+RUN cd ${SOURCES} &&     CGO_ENABLED=0 go install -ldflags="    -X httpgo/pkg/http/api.Version=${VERSION_ARG}     -X httpgo/pkg/http/api.BuildTime=${BUILD_TIME_ARG}     -X httpgo/pkg/http/api.CommitHash=${COMMIT_HASH_ARG}"
 
 ENV PORT 8086
 EXPOSE 8086
